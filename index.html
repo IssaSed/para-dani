@@ -548,7 +548,7 @@
     <div class="music-player">
         <button id="playBtn" onclick="togglePlay()">▶</button>
         <span class="music-info">Reproducir</span>
-        <audio id="bgMusic" loop preload="auto" src="sone.mp3"></audio>
+        <audio id="bgMusic" loop preload="auto" src="audio/Zoé - Soñé (MTV Unplugged) [HJqlA_HTEU8].mp3"></audio>
     </div>
 
     <!-- AVISO PARA PRESIONAR LA MÚSICA -->
@@ -1099,9 +1099,9 @@
 
             requestAnimationFrame(frame);
         })();
-    </script>
 
-<!-- ===== EXTRAS PARA DANI: pegar justo antes de </body> ===== -->
+        <!-- ===== EXTRAS PARA DANI: pegar justo antes de </body> ===== -->
+        </script>
 <style>
 /* 1. Sobre de bienvenida */
 #envOverlay{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;
@@ -1138,6 +1138,19 @@
 .music-player .vol{width:70px;accent-color:#f472b6;cursor:pointer}
 @media(max-width:850px){.music-player .vol{width:54px}}
 
+/* Reproductor más transparente y más abajo, para no tapar el recorrido sol/luna */
+.music-player{
+  top:92px!important;
+  background:rgba(131,24,67,0.35)!important;
+  backdrop-filter:blur(6px)!important;
+  box-shadow:0 4px 12px rgba(190,24,93,0.18)!important;
+}
+.music-hint{top:150px!important}
+@media(max-width:850px){
+  .music-player{top:70px!important}
+  .music-hint{top:128px!important}
+}
+
 /* Sol y luna que cruzan el cielo con el scroll */
 #celestial{position:fixed;top:0;left:0;width:100%;height:0;z-index:-1;pointer-events:none}
 .cel-body{position:absolute;top:18px;width:52px;height:52px;border-radius:50%;transform:translate(-50%,0)}
@@ -1155,9 +1168,22 @@
   background:radial-gradient(ellipse at 50% 100%,rgba(255,196,96,.95) 0%,rgba(255,132,84,.55) 32%,rgba(214,82,127,.18) 55%,transparent 70%)}
 
 /* 2. Aparecer al hacer scroll */
-.card.reveal{opacity:0;transform:translateY(44px);transition:opacity .9s ease,transform .9s ease,border-color .4s}
+.card.reveal{opacity:0;transform:translateY(34px);transition:opacity .9s ease,transform .9s ease,border-color .4s}
 .card.reveal.in{opacity:1;transform:none}
 .card.reveal.in:hover{transform:translateY(-5px)}
+
+/* Más espacio entre tarjetas para leer con calma */
+.timeline-item{margin-bottom:110px!important}
+@media(max-width:850px){
+  .timeline-item{margin-bottom:92px!important}
+  .card{padding:28px 20px!important}
+  .card p{font-size:1.02rem!important; line-height:1.75!important}
+  .header-central{padding:14px!important}
+  .header-central h1{font-size:clamp(2rem,9vw,2.6rem)!important}
+  .mc-header-container{min-height:400px!important; padding-top:34px!important}
+  .scroll-indicator-card{padding:10px 18px!important}
+  .view-hint{margin-top:70px!important; max-width:88vw!important}
+}
 .timeline-item .timeline-dot{transition:background .6s,box-shadow .6s,transform .6s}
 .timeline-item.dim .timeline-dot{background:#f9c5dc;box-shadow:none;transform:scale(.7)}
 .timeline-item:not(.dim) .timeline-dot{animation:dotGlow 2.6s ease-in-out infinite}
@@ -1242,11 +1268,19 @@
     setTimeout(()=>ov.remove(), 2400);
   });
 
+  /* Reducir un poco la cantidad de pétalos generados por el script original */
+  (function(){
+    const box = document.getElementById('petals-container');
+    if (!box) return;
+    const all = Array.from(box.children);
+    all.forEach((el,i)=>{ if (i % 3 === 2) el.remove(); }); // quita 1 de cada 3 (~33% menos)
+  })();
+
   /* 2. Tarjetas al hacer scroll */
   const items = document.querySelectorAll('.timeline-item');
   const io = new IntersectionObserver(es=>es.forEach(e=>{
     if (e.isIntersecting){ e.target.classList.remove('dim'); e.target.querySelector('.card').classList.add('in'); io.unobserve(e.target); }
-  }),{threshold:.2});
+  }),{threshold:.12, rootMargin:'0px 0px -8% 0px'});
   items.forEach(it=>{ it.classList.add('dim'); it.querySelector('.card').classList.add('reveal'); io.observe(it); });
 
   /* 3. Tulipanes: desfase entre flores + envoltura para abrir/cerrar con el scroll */
@@ -1370,6 +1404,5 @@
 })();
 </script>
 <!-- ===== FIN EXTRAS ===== -->
-
 </body>
 </html>
