@@ -1,0 +1,164 @@
+/* 1. Sobre de bienvenida */
+#envOverlay{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;
+  background:linear-gradient(180deg,#d6e8ff 0%,#9fc6f8 45%,#a9a3e6 100%);cursor:pointer;transition:opacity .9s ease,visibility .9s}
+#envOverlay.gone{opacity:0;visibility:hidden}
+#envOverlay h2{font-family:'Dancing Script',cursive;font-size:2.4rem;color:#be185d;text-shadow:0 0 16px #fff}
+#envOverlay p.tap{font-size:.95rem;color:#831843;letter-spacing:1px;animation:tapPulse 1.8s ease-in-out infinite;text-align:center}
+@keyframes tapPulse{0%,100%{opacity:.55}50%{opacity:1}}
+.env{position:relative;width:min(78vw,320px);aspect-ratio:1.5;background:#fff1f6;border-radius:10px;
+  box-shadow:0 18px 40px rgba(190,24,93,.3),0 0 0 2px rgba(244,196,48,.6);perspective:800px}
+.env .letter{position:absolute;left:8%;right:8%;top:6%;height:80%;background:#fffafc;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;font-family:'Dancing Script',cursive;font-size:1.6rem;color:#db2777;
+  transition:transform .9s ease .3s}
+.env .front{position:absolute;inset:0;border-radius:10px;background:#fbd3e4;clip-path:polygon(0 100%,0 0,50% 58%,100% 0,100% 100%)}
+.env .flap{position:absolute;left:0;top:0;width:100%;height:58%;background:#f9a8d4;clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:top;transition:transform .8s ease,z-index 0s .4s;z-index:3;border-radius:10px 10px 0 0}
+.env .seal{position:absolute;left:50%;top:58%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;z-index:4;
+  background:radial-gradient(circle at 35% 30%,#fff6d9,#f4c430 55%,#b8860b);display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;box-shadow:0 4px 12px rgba(184,134,11,.5);transition:opacity .4s}
+.env.open .flap{transform:rotateX(180deg);z-index:0}
+.env.open .seal{opacity:0}
+.env.open .letter{transform:translateY(-38%)}
+
+.env{animation:envWait 3.4s ease-in-out infinite}
+.env.open{animation:none}
+@keyframes envWait{0%,45%,100%{transform:translateY(0) rotate(0)}
+ 52%{transform:translateY(-10px) rotate(-3.5deg)}60%{transform:translateY(-4px) rotate(3.5deg)}
+ 68%{transform:translateY(-8px) rotate(-2.5deg)}76%{transform:translateY(0) rotate(2deg)}86%{transform:translateY(0) rotate(0)}}
+.env:not(.open) .flap{animation:flapPeek 3.4s ease-in-out infinite}
+@keyframes flapPeek{0%,48%,100%{transform:rotateX(0)}58%,70%{transform:rotateX(22deg)}80%{transform:rotateX(0)}}
+.env:not(.open) .seal{animation:sealBeat 1.7s ease-in-out infinite}
+@keyframes sealBeat{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.music-player .vol{width:70px;accent-color:#f472b6;cursor:pointer}
+@media(max-width:850px){.music-player .vol{width:54px}}
+
+/* Reproductor más transparente y más abajo */
+.music-player{
+  top:92px!important;
+  background:rgba(131,24,67,0.35)!important;
+  backdrop-filter:blur(6px)!important;
+  box-shadow:0 4px 12px rgba(190,24,93,0.18)!important;
+}
+.music-hint{top:150px!important}
+@media(max-width:850px){
+  .music-player{top:70px!important}
+  .music-hint{top:128px!important}
+}
+
+/* Sol y luna */
+#celestial{position:fixed;top:0;left:0;width:100%;height:0;z-index:-1;pointer-events:none}
+.cel-body{position:absolute;top:18px;width:52px;height:52px;border-radius:50%;transform:translate(-50%,0)}
+#sunBody{background:radial-gradient(circle at 35% 30%,#fffbe6,#ffd166 45%,#f4a83a 75%,#e8862c 100%);
+  box-shadow:0 0 22px 8px rgba(255,209,102,.75),0 0 46px 18px rgba(244,168,58,.4)}
+#moonBody{background:radial-gradient(circle at 38% 34%,#ffffff,#eef1fb 45%,#c9d3f0 80%,#aab4dd 100%);
+  box-shadow:0 0 18px 6px rgba(255,255,255,.55),0 0 40px 16px rgba(180,190,230,.35)}
+#moonBody::after{content:'';position:absolute;top:5%;left:22%;width:78%;height:90%;border-radius:50%;
+  background:linear-gradient(180deg,#9fc6f8,#7eaeee)}
+@media(max-width:850px){.cel-body{width:38px;height:38px;top:12px}}
+
+/* Cielo atardecer */
+#sky{position:fixed;inset:0;z-index:-2;pointer-events:none}
+#sunGlow{position:fixed;left:50%;bottom:-12vh;width:110vw;height:70vh;transform:translateX(-50%);z-index:-1;pointer-events:none;opacity:0;
+  background:radial-gradient(ellipse at 50% 100%,rgba(255,196,96,.95) 0%,rgba(255,132,84,.55) 32%,rgba(214,82,127,.18) 55%,transparent 70%)}
+
+/* 2. Aparecer al hacer scroll */
+.card.reveal{opacity:0;transform:translateY(34px);transition:opacity .9s ease,transform .9s ease,border-color .4s}
+.card.reveal.in{opacity:1;transform:none}
+.card.reveal.in:hover{transform:translateY(-5px)}
+
+.timeline-item{margin-bottom:110px!important}
+@media(max-width:850px){
+  .timeline-item{margin-bottom:92px!important}
+  .card{padding:28px 20px!important}
+  .card p{font-size:1.02rem!important; line-height:1.75!important}
+  .header-central{padding:14px!important}
+  .header-central h1{font-size:clamp(2rem,9vw,2.6rem)!important}
+  .mc-header-container{min-height:400px!important; padding-top:34px!important}
+  .scroll-indicator-card{padding:10px 18px!important}
+  .view-hint{margin-top:70px!important; max-width:88vw!important}
+}
+.timeline-item .timeline-dot{transition:background .6s,box-shadow .6s,transform .6s}
+.timeline-item.dim .timeline-dot{background:#f9c5dc;box-shadow:none;transform:scale(.7)}
+.timeline-item:not(.dim) .timeline-dot{animation:dotGlow 2.6s ease-in-out infinite}
+@keyframes dotGlow{0%,100%{box-shadow:0 0 12px #f9a8d4,0 0 0 2px #f4c430}50%{box-shadow:0 0 24px #ec4899,0 0 0 4px #f4c430}}
+
+/* 3. Tulipanes con viento */
+.tulip-band g.tulip-wrap{transform-box:view-box}
+.tulip-band use[href="#tulipFlower"]{transform-box:view-box;animation:sway 5s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:rotate(-0.6deg)}50%{transform:rotate(3.6deg)}}
+
+/* 4. Nubes */
+.cloud{position:fixed;left:0;z-index:0;pointer-events:none;background:var(--cloudc,rgba(255,255,255,.55));border-radius:60px;filter:blur(1px);
+  animation:cloudMove linear infinite}
+.cloud::before,.cloud::after{content:'';position:absolute;background:inherit;border-radius:50%}
+.cloud::before{width:46%;height:150%;left:14%;top:-70%}
+.cloud::after{width:36%;height:120%;right:14%;top:-45%}
+@keyframes cloudMove{from{transform:translateX(-320px)}to{transform:translateX(110vw)}}
+
+/* 5. Mariposas */
+.bfly{position:fixed;left:0;top:0;z-index:58;pointer-events:none;width:34px;height:28px;filter:drop-shadow(0 0 5px rgba(255,255,255,.9))}
+.bfly svg{width:100%;height:100%;overflow:visible}
+.bfly .wl,.bfly .wr{animation:flap .28s ease-in-out infinite alternate}
+.bfly .wl{transform-origin:20px 14px}.bfly .wr{transform-origin:20px 14px;animation-name:flap2}
+@keyframes flap{to{transform:scaleX(.25)}}
+@keyframes flap2{to{transform:scaleX(.25)}}
+
+/* 6. Botón final */
+.btn-whatsapp{animation:btnPulse 2.4s ease-in-out infinite}
+@keyframes btnPulse{0%,100%{box-shadow:0 8px 20px rgba(244,196,48,.35),0 0 0 0 rgba(244,196,48,.55)}50%{box-shadow:0 8px 26px rgba(244,196,48,.55),0 0 0 14px rgba(244,196,48,0)}}
+.btn-whatsapp::after{content:'';position:absolute;inset:0;border-radius:50px;pointer-events:none;
+  background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.75) 50%,transparent 65%);background-size:250% 100%;
+  animation:shine 3.2s ease-in-out infinite}
+@keyframes shine{0%{background-position:150% 0}60%,100%{background-position:-50% 0}}
+.perch{position:absolute;right:6px;top:-40px;width:52px;pointer-events:none;opacity:0;transform:translateY(-30px) scale(.6);
+  transition:opacity .6s,transform .7s cubic-bezier(.3,1.5,.5,1);filter:drop-shadow(0 0 5px #fff) drop-shadow(0 0 10px rgba(244,196,48,.7))}
+.perch.on{opacity:1;transform:none;animation:hop 2.6s ease-in-out .8s infinite}
+@keyframes hop{0%,80%,100%{transform:translateY(0)}88%{transform:translateY(-8px)}94%{transform:translateY(0)}}
+
+@media (prefers-reduced-motion:reduce){
+  .cloud,.tulip-band use,.btn-whatsapp,.btn-whatsapp::after,.perch.on{animation:none!important}
+  .card.reveal{opacity:1;transform:none}
+}
+
+/* Botón final: casita de Snoopy */
+.btn-whatsapp.btn-casita,
+.btn-whatsapp.btn-casita:hover {
+    flex-direction: column;
+    gap: 6px;
+    width: auto;
+    max-width: none;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    animation: none;
+    transform: none;
+}
+.btn-casita::after { content: none; }
+
+.btn-casita img {
+    width: 200px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 6px 14px rgba(131, 24, 67, .35));
+    transition: transform .35s ease, filter .35s ease;
+}
+.btn-casita:hover img {
+    transform: translateY(-8px) rotate(-2deg);
+    filter: drop-shadow(0 10px 20px rgba(244, 196, 48, .7));
+}
+.casita-texto {
+    font-size: .95rem;
+    font-weight: 600;
+    color: #fff8fa;
+    background: rgba(131, 24, 67, .7);
+    padding: 5px 14px;
+    border-radius: 20px;
+}
+/* El Woodstock que se posaba sobre el botón ya viene en la imagen */
+.btn-casita .perch { display: none; }
+
+@media (max-width: 850px) {
+    .btn-casita img { width: 150px; }
+}

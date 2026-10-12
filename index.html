@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Dani 🌸</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/extras.css">
+</head>
+<body>
+
+    <!-- REPRODUCTOR -->
+    <div class="music-player">
+        <button id="playBtn" onclick="togglePlay()">▶</button>
+        <span class="music-info">Reproducir</span>
+        <audio id="bgMusic" loop preload="auto" src="audio/RiskItAll.mp3"></audio>
+    </div>
+
+    <div class="music-hint" id="musicHint">
+        <span class="arrow">↑</span>
+        <span>Presiona para la música</span>
+    </div>
+
+    <div class="petals-container" id="petals-container"></div>
+    <div class="sparkles-container" id="sparkles-container"></div>
+
+    <!-- WOODSTOCK VOLANDO -->
+    <div class="trail-layer" id="trail-layer"></div>
+    <img class="woodstock" id="woodstock" alt="" aria-hidden="true" src="img/WoodstockFlor.png" width="1000" height="800">
+
+    <!-- ENCABEZADO -->
+    <div class="mc-header-container">
+        <div class="header-central">
+            <span class="badge-anime">🌸 Un pequeño detalle 🌸</span>
+            <h1>Holaa Dani</h1>
+        </div>
+
+        <div class="scroll-indicator-card">
+            <span class="cursiva" style="margin:0; font-size: 1.6rem;">Desliza hacia abajo ✨</span>
+        </div>
+
+        <div class="view-hint">
+            <span>Se ve mejor en computadora, o si estás en el teléfono, gíralo en horizontal</span>
+        </div>
+    </div>
+
+    <!-- FRANJA DE TULIPANES (el SVG se inyecta desde js/tulipanes.js) -->
+    <div class="tulip-band" id="tulipBand"></div>
+
+    <!-- LÍNEA DE TIEMPO -->
+    <div class="timeline-container">
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="card">
+                <span class="badge-anime">EL MOTIVO</span>
+                <p>Tenía muchas ganas de dejarte este mensajito por aquí. Recuerdo el primer momento en el que nos vimos y el como me surgió la idea de hablar contigo. <br><br>Desde que empezamos a convivir en algunos momentos bonitos, quería expresarte lo bien que me la paso contigo.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="card">
+                <span class="badge-anime">SINCERIDAD</span>
+                <p> Disfruto mucho cada plática y cada risa a tu lado. Ver tus reacciones y pasar tiempo conociéndote mejor son detalles que guardo con mucho cariño.<br><br>Cada momento contigo se siente super natural y especial.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="card">
+                <span class="badge-anime">LO QUE PRETENDO</span>
+                <p>Siendo sincero, no quería guardarme esto ni hacer como si nada.<br><br>La verdad es que me siento muy especial a tu lado, me encanta como hemos construido y me pareces una persona increíblemente genial.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="card">
+                <span class="badge-anime">ME GUSTARÍA...</span>
+                <p>Me emociona la idea de tener más momentos así contigo Salidas donde los dos estemos comodos.<br><br>Me gustaría seguir saliendo contigo, conocerte mucho más y ver qué puede surgir entre nosotros, respetando siempre tus tiempos y tus procesos.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="card">
+                <span class="badge-anime">SIN PRISA</span>
+                <p>No te lo digo para hacerte sentir presionada ni para ponerte en un compromiso.<br><br>Si tú también estás dispuesta, me gustaría intentarlo poco a poco, sin apresurarnos, simplemente conociéndonos desde otra perspectiva y disfrutando el camino.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="card">
+                <span class="badge-anime">NTP &lt;3</span>
+                <p>No espero una respuesta inmediata ni quiero que sientas que tienes que darla ahorita. Solo quería que lo supieras y ser contigo.<br><br>Solo... me alegra mucho el haber coincidir a tu lado. ✨</p>
+            </div>
+        </div>
+
+        <div class="btn-container-timeline">
+            <a href="https://wa.me/7774400768?text=Hola,%20ya%20lo%20le%C3%AD%20%E2%9C%A8" class="btn-whatsapp btn-casita" target="_blank" aria-label="Ir al chat">
+                <img src="img/snoopy.png" alt="Ir al chat">
+                <span class="casita-texto">Ir al chat 💬</span>
+            </a>
+        </div>
+
+    </div>
+
+    <!-- El orden importa: primero el SVG, luego los scripts -->
+    <script src="js/tulipanes.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/extras.js"></script>
+</body>
+</html>
